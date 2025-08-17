@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memento - Digital Time Capsule</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="app-styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Onboarding Flow (same as before) -->
+        <div class="onboarding-flow" id="onboarding-flow">
+            <!-- Screen 1: Welcome -->
+            <div class="onboarding-screen active" id="screen-1">
+                <div class="content">
+                    <div class="app-icon">
+                        <div class="icon-chest">
+                            <div class="chest-body"></div>
+                            <div class="chest-lid"></div>
+                            <div class="chest-glow"></div>
+                        </div>
+                    </div>
+                    <h1 class="app-title">Memento</h1>
+                    <p class="subtitle">Your personal time capsule</p>
+                    <div class="magic-sparkles">
+                        <div class="sparkle"></div>
+                        <div class="sparkle"></div>
+                        <div class="sparkle"></div>
+                    </div>
+                </div>
+                <button class="continue-btn" onclick="nextScreen(1)">
+                    <span>Begin Journey</span>
+                </button>
+            </div>
+
+            <!-- Other onboarding screens... -->
+            <div class="onboarding-screen" id="screen-2">
+                <div class="content">
+                    <div class="feature-icon">
+                        <div class="camera-icon"></div>
+                    </div>
+                    <h2>Capture Moments</h2>
+                    <p>Connect your social media accounts to automatically save your memories from Twitter, Instagram, Facebook, and more.</p>
+                    <div class="progress-dots">
+                        <div class="dot"></div>
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                <button class="continue-btn" onclick="nextScreen(2)">
+                    <span>Continue</span>
+                </button>
+            </div>
+
+            <div class="onboarding-screen" id="screen-3">
+                <div class="content">
+                    <div class="feature-icon">
+                        <div class="clock-icon"></div>
+                    </div>
+                    <h2>Lock in Time</h2>
+                    <p>Set future dates to unlock your memories. Create surprise packages for your future self.</p>
+                    <div class="progress-dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                <button class="continue-btn" onclick="nextScreen(3)">
+                    <span>Continue</span>
+                </button>
+            </div>
+
+            <div class="onboarding-screen" id="screen-4">
+                <div class="content">
+                    <div class="feature-icon">
+                        <div class="heart-icon"></div>
+                    </div>
+                    <h2>Rediscover Magic</h2>
+                    <p>Receive gentle reminders when your time capsules are ready to unlock. Relive your precious memories.</p>
+                    <div class="progress-dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot active"></div>
+                    </div>
+                </div>
+                <button class="continue-btn" onclick="showMainApp()">
+                    <span>Start Creating</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main App Interface -->
+        <div class="main-app" id="main-app" style="display: none;">
+            <!-- Navigation Header -->
+            <header class="app-header">
+                <div class="header-content">
+                    <div class="app-logo">
+                        <div class="mini-chest"></div>
+                        <span>Memento</span>
+                    </div>
+                    <div class="header-actions">
+                        <button class="notification-btn">
+                            <span class="notification-count">3</span>
+                            🔔
+                        </button>
+                        <button class="profile-btn">👤</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Tab Navigation -->
+                <nav class="tab-navigation">
+                    <button class="tab-btn active" data-tab="home">🏠 Home</button>
+                    <button class="tab-btn" data-tab="connect">🔗 Connect</button>
+                    <button class="tab-btn" data-tab="capsules">📦 Capsules</button>
+                    <button class="tab-btn" data-tab="discover">✨ Discover</button>
+                </nav>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Home Tab -->
+                    <div class="tab-pane active" id="home-tab">
+                        <div class="home-header">
+                            <h2>Your Memory Collection</h2>
+                            <p>Preserve your precious moments for the future</p>
+                        </div>
+
+                        <div class="quick-actions">
+                            <button class="action-card" onclick="openCreateModal()">
+                                <div class="action-icon">📸</div>
+                                <span>Add Memory</span>
+                            </button>
+                            <button class="action-card" onclick="showTab('connect')">
+                                <div class="action-icon">🔗</div>
+                                <span>Connect Social</span>
+                            </button>
+                            <button class="action-card" onclick="showTab('capsules')">
+                                <div class="action-icon">⏰</div>
+                                <span>Time Capsule</span>
+                            </button>
+                        </div>
+
+                        <div class="recent-memories">
+                            <h3>Recent Additions</h3>
+                            <div class="memory-grid" id="memory-grid">
+                                <!-- Recent memories will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connect Tab -->
+                    <div class="tab-pane" id="connect-tab">
+                        <div class="connect-header">
+                            <h2>Connect Your Accounts</h2>
+                            <p>Link your social media to automatically save memories</p>
+                        </div>
+
+                        <div class="social-connections">
+                            <div class="social-card" data-platform="twitter">
+                                <div class="social-info">
+                                    <div class="social-icon twitter-icon">🐦</div>
+                                    <div class="social-details">
+                                        <h3>Twitter</h3>
+                                        <p>Save your tweets, likes, and media</p>
+                                        <span class="connection-status" id="twitter-status">Not connected</span>
+                                    </div>
+                                </div>
+                                <button class="connect-btn" onclick="connectSocial('twitter')">Connect</button>
+                            </div>
+
+                            <div class="social-card" data-platform="instagram">
+                                <div class="social-info">
+                                    <div class="social-icon instagram-icon">📷</div>
+                                    <div class="social-details">
+                                        <h3>Instagram</h3>
+                                        <p>Import your photos and stories</p>
+                                        <span class="connection-status" id="instagram-status">Not connected</span>
+                                    </div>
+                                </div>
+                                <button class="connect-btn" onclick="connectSocial('instagram')">Connect</button>
+                            </div>
+
+                            <div class="social-card" data-platform="facebook">
+                                <div class="social-info">
+                                    <div class="social-icon facebook-icon">👥</div>
+                                    <div class="social-details">
+                                        <h3>Facebook</h3>
+                                        <p>Save posts, photos, and memories</p>
+                                        <span class="connection-status" id="facebook-status">Not connected</span>
+                                    </div>
+                                </div>
+                                <button class="connect-btn" onclick="connectSocial('facebook')">Connect</button>
+                            </div>
+
+                            <div class="social-card" data-platform="youtube">
+                                <div class="social-info">
+                                    <div class="social-icon youtube-icon">📹</div>
+                                    <div class="social-details">
+                                        <h3>YouTube</h3>
+                                        <p>Archive your favorite videos</p>
+                                        <span class="connection-status" id="youtube-status">Not connected</span>
+                                    </div>
+                                </div>
+                                <button class="connect-btn" onclick="connectSocial('youtube')">Connect</button>
+                            </div>
+
+                            <div class="social-card" data-platform="tiktok">
+                                <div class="social-info">
+                                    <div class="social-icon tiktok-icon">🎵</div>
+                                    <div class="social-details">
+                                        <h3>TikTok</h3>
+                                        <p>Save your videos and favorites</p>
+                                        <span class="connection-status" id="tiktok-status">Not connected</span>
+                                    </div>
+                                </div>
+                                <button class="connect-btn" onclick="connectSocial('tiktok')">Connect</button>
+                            </div>
+
+                            <div class="social-card" data-platform="spotify">
+                                <div class="social-info">
+                                    <div class="social-icon spotify-icon">🎶</div>
+                                    <div class="social-details">
+                                        <h3>Spotify</h3>
+                                        <p>Archive your playlists and listening history</p>
+                                        <span class="connection-status" id="spotify-status">Not connected</span>
+                                    </div>
+                                </div>
+                                <button class="connect-btn" onclick="connectSocial('spotify')">Connect</button>
+                            </div>
+                        </div>
+
+                        <div class="sync-settings">
+                            <h3>Sync Settings</h3>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="auto-sync" checked>
+                                    <span class="checkmark"></span>
+                                    Automatically sync new content
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="sync-media" checked>
+                                    <span class="checkmark"></span>
+                                    Include images and videos
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="sync-frequency">
+                                    <span class="checkmark"></span>
+                                    Daily sync reminders
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Capsules Tab -->
+                    <div class="tab-pane" id="capsules-tab">
+                        <div class="capsules-header">
+                            <h2>Your Time Capsules</h2>
+                            <p>Memories locked in time, waiting to be rediscovered</p>
+                            <button class="create-capsule-btn" onclick="openCapsuleModal()">
+                                + Create New Capsule
+                            </button>
+                        </div>
+
+                        <div class="capsules-grid" id="capsules-grid">
+                            <!-- Time capsules will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Discover Tab -->
+                    <div class="tab-pane" id="discover-tab">
+                        <div class="discover-header">
+                            <h2>Rediscover Your Memories</h2>
+                            <p>Unlocked capsules and memory highlights</p>
+                        </div>
+
+                        <div class="memory-timeline" id="memory-timeline">
+                            <!-- Timeline will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Modals -->
+        <!-- Create Memory Modal -->
+        <div class="modal" id="create-memory-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New Memory</h3>
+                    <button class="close-btn" onclick="closeModal('create-memory-modal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="memory-form">
+                        <div class="form-group">
+                            <label>Memory Type</label>
+                            <select id="memory-type">
+                                <option value="photo">Photo</option>
+                                <option value="video">Video</option>
+                                <option value="text">Text Note</option>
+                                <option value="audio">Audio</option>
+                                <option value="social">Social Post</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="memory-title" placeholder="Give your memory a name...">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="memory-description" placeholder="What makes this memory special?"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload File</label>
+                            <div class="file-upload-area" id="file-upload">
+                                <p>Drag & drop files here or click to browse</p>
+                                <input type="file" id="memory-file" multiple accept="image/*,video/*,audio/*">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Memory Date</label>
+                            <input type="date" id="memory-date">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Tags</label>
+                            <input type="text" id="memory-tags" placeholder="family, vacation, birthday...">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeModal('create-memory-modal')">Cancel</button>
+                    <button class="btn-primary" onclick="saveMemory()">Save Memory</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Time Capsule Modal -->
+        <div class="modal" id="create-capsule-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Create Time Capsule</h3>
+                    <button class="close-btn" onclick="closeModal('create-capsule-modal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="capsule-form">
+                        <div class="form-group">
+                            <label>Capsule Name</label>
+                            <input type="text" id="capsule-name" placeholder="My 2024 Memories...">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Unlock Date</label>
+                            <input type="datetime-local" id="capsule-unlock-date">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Select Memories</label>
+                            <div class="memory-selector" id="memory-selector">
+                                <!-- Available memories will be listed here -->
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Message to Future Self</label>
+                            <textarea id="capsule-message" placeholder="A note for when you open this capsule..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeModal('create-capsule-modal')">Cancel</button>
+                    <button class="btn-primary" onclick="saveCapsule()">Create Capsule</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Connect Modal -->
+        <div class="modal" id="social-connect-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Connect <span id="platform-name"></span></h3>
+                    <button class="close-btn" onclick="closeModal('social-connect-modal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="connect-info">
+                        <div class="platform-icon" id="connect-platform-icon"></div>
+                        <p>We'll redirect you to <span id="platform-name-2"></span> to authorize Memento to access your content.</p>
+                        <ul>
+                            <li>✓ Read your posts and media</li>
+                            <li>✓ Access your profile information</li>
+                            <li>✗ We never post on your behalf</li>
+                            <li>✗ Your data stays private and secure</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeModal('social-connect-modal')">Cancel</button>
+                    <button class="btn-primary" onclick="authorizeConnection()">Continue to <span id="platform-name-3"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p id="loading-message">Processing...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Vault - Your Digital Time Capsule</title>
+    <meta http-equiv="refresh" content="0; url=redesigned-app.html">
+    <link rel="canonical" href="redesigned-app.html">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #D4A574, #F2D492);
+            color: #4A3F35;
+        }
+        .loading {
+            text-align: center;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #F4F0E8;
+            border-left: 4px solid #E6C79A;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .backup-link {
+            margin-top: 20px;
+        }
+        .backup-link a {
+            color: #4A3F35;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <div class="spinner"></div>
+        <h1>🏛️ Story Vault</h1>
+        <p>Loading your digital time capsule...</p>
+        <div class="backup-link">
+            <p>If you're not redirected automatically, <a href="redesigned-app.html">click here</a>.</p>
+        </div>
+    </div>
+
+    <script>
+        // Backup redirect in case meta refresh fails
+        setTimeout(() => {
+            window.location.href = 'redesigned-app.html';
+        }, 1000);
+    </script>
+</body>
+</html>

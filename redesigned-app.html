@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Vault - Your Digital Time Capsule</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="redesigned-styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Onboarding Flow -->
+        <div class="onboarding-flow" id="onboarding-flow">
+            <!-- Welcome Screen -->
+            <div class="onboarding-screen active" id="screen-1">
+                <div class="screen-background">
+                    <div class="floating-elements">
+                        <div class="float-item">📸</div>
+                        <div class="float-item">💭</div>
+                        <div class="float-item">🎵</div>
+                        <div class="float-item">✨</div>
+                    </div>
+                </div>
+                
+                <div class="screen-content">
+                    <div class="app-branding">
+                        <div class="app-icon-large">
+                            <div class="treasure-chest">
+                                <div class="chest-body"></div>
+                                <div class="chest-lid"></div>
+                                <div class="chest-sparkle">✨</div>
+                            </div>
+                        </div>
+                        <h1>Story Vault</h1>
+                        <p class="tagline">Your stories, locked away like treasures</p>
+                    </div>
+                    
+                    <div class="intro-message">
+                        <p>Turn your digital life into a beautiful time capsule. Collect memories from social media, lock them away, and rediscover them when the time feels right.</p>
+                    </div>
+                    
+                    <button class="primary-button" onclick="nextScreen(1)">
+                        Begin Your Journey
+                        <span class="button-icon">→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Data Storage Choice -->
+            <div class="onboarding-screen" id="screen-2">
+                <div class="screen-content">
+                    <h2>Where should we keep your memories?</h2>
+                    <p class="screen-subtitle">Choose how you want to store and access your digital time capsules</p>
+                    
+                    <div class="storage-options">
+                        <div class="storage-option local-option" data-storage="local">
+                            <div class="option-header">
+                                <div class="option-icon">💾</div>
+                                <div class="option-badge free-badge">FREE</div>
+                            </div>
+                            <h3>Local Storage</h3>
+                            <p>Your memories stay on this device, private and secure</p>
+                            
+                            <div class="option-features">
+                                <div class="feature">✓ Completely private</div>
+                                <div class="feature">✓ No internet required</div>
+                                <div class="feature">✓ Fast access</div>
+                                <div class="feature limitation">⚠️ Device only</div>
+                                <div class="feature limitation">⚠️ No backup</div>
+                            </div>
+                            
+                            <button class="option-button" onclick="selectStorage('local')">
+                                Choose Local
+                            </button>
+                        </div>
+                        
+                        <div class="storage-option cloud-option" data-storage="cloud">
+                            <div class="option-header">
+                                <div class="option-icon">☁️</div>
+                                <div class="option-badge premium-badge">PREMIUM</div>
+                            </div>
+                            <h3>Cloud Storage</h3>
+                            <p>Access your memories anywhere, automatically backed up</p>
+                            
+                            <div class="option-features">
+                                <div class="feature">✨ Access anywhere</div>
+                                <div class="feature">✨ Automatic backup</div>
+                                <div class="feature">✨ Cross-device sync</div>
+                                <div class="feature">✨ Share time capsules</div>
+                                <div class="feature">✨ Advanced features</div>
+                            </div>
+                            
+                            <div class="trial-offer">
+                                <span class="trial-text">7-day free trial</span>
+                                <span class="trial-price">then $4.99/month</span>
+                            </div>
+                            
+                            <button class="option-button premium" onclick="selectStorage('cloud')">
+                                Start Free Trial
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p class="storage-note">You can change this anytime in settings</p>
+                </div>
+            </div>
+
+            <!-- Platform Selection -->
+            <div class="onboarding-screen" id="screen-3">
+                <div class="screen-content">
+                    <h2>Connect your digital life</h2>
+                    <p class="screen-subtitle">Choose which platforms to preserve memories from</p>
+                    
+                    <div class="platform-grid">
+                        <div class="platform-card" data-platform="instagram">
+                            <div class="platform-icon instagram-icon"><i class="fab fa-instagram"></i></div>
+                            <h3>Instagram</h3>
+                            <p>Photos, stories, and moments</p>
+                            <div class="platform-status">Available</div>
+                        </div>
+                        
+                        <div class="platform-card" data-platform="twitter">
+                            <div class="platform-icon twitter-icon"><i class="fab fa-twitter"></i></div>
+                            <h3>Twitter</h3>
+                            <p>Tweets and conversations</p>
+                            <div class="platform-status">Available</div>
+                        </div>
+                        
+                        <div class="platform-card premium-locked" data-platform="facebook">
+                            <div class="platform-icon facebook-icon"><i class="fab fa-facebook-f"></i></div>
+                            <h3>Facebook</h3>
+                            <p>Posts and memories</p>
+                            <div class="platform-status premium">Premium</div>
+                        </div>
+                        
+                        <div class="platform-card premium-locked" data-platform="spotify">
+                            <div class="platform-icon spotify-icon"><i class="fab fa-spotify"></i></div>
+                            <h3>Spotify</h3>
+                            <p>Music and playlists</p>
+                            <div class="platform-status premium">Premium</div>
+                        </div>
+                        
+                        <div class="platform-card premium-locked" data-platform="youtube">
+                            <div class="platform-icon youtube-icon"><i class="fab fa-youtube"></i></div>
+                            <h3>YouTube</h3>
+                            <p>Videos and favorites</p>
+                            <div class="platform-status premium">Premium</div>
+                        </div>
+                        
+                        <div class="platform-card premium-locked" data-platform="tiktok">
+                            <div class="platform-icon tiktok-icon"><i class="fab fa-tiktok"></i></div>
+                            <h3>TikTok</h3>
+                            <p>Videos and likes</p>
+                            <div class="platform-status premium">Premium</div>
+                        </div>
+                    </div>
+                    
+                    <button class="primary-button" onclick="nextScreen(3)">
+                        Continue
+                        <span class="button-icon">→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ready Screen -->
+            <div class="onboarding-screen" id="screen-4">
+                <div class="screen-content">
+                    <div class="completion-icon">🎉</div>
+                    <h2>You're all set!</h2>
+                    <p class="screen-subtitle">Ready to start creating your digital time capsule</p>
+                    
+                    <div class="setup-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">Storage:</span>
+                            <span class="summary-value" id="selected-storage">Local</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Available platforms:</span>
+                            <span class="summary-value" id="available-platforms">2</span>
+                        </div>
+                    </div>
+                    
+                    <button class="primary-button" onclick="showMainApp()">
+                        Enter Story Vault
+                        <span class="button-icon">✨</span>
+                    </button>
+                    
+                    <!-- Debug button for quick testing -->
+                    <button class="secondary-button" onclick="skipOnboarding()" style="margin-top: 10px; font-size: 0.9rem;">
+                        Skip to Dashboard (Debug)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Application -->
+        <div class="main-app" id="main-app" style="display: none;">
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <div class="nav-brand">
+                    <div class="brand-icon">
+                        <div class="mini-chest"></div>
+                    </div>
+                    <span class="brand-text">Story Vault</span>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="nav-button" id="sync-button" onclick="syncPlatforms()">
+                        <span class="sync-icon">🔄</span>
+                        Sync
+                    </button>
+                    <div class="storage-indicator" id="storage-indicator">
+                        <span class="storage-icon">💾</span>
+                        <span class="storage-text">Local</span>
+                    </div>
+                    <button class="nav-button notification-button" id="notification-button" onclick="showNotifications()">
+                        <span class="notification-icon">🔔</span>
+                        <span class="notification-badge" id="notification-badge" style="display: none;">0</span>
+                    </button>
+                    <button class="nav-button profile-button" id="profile-button" onclick="showProfileMenu()">
+                        <span class="profile-icon">👤</span>
+                    </button>
+                    <button class="nav-button upgrade-button" onclick="showUpgradeModal()" id="upgrade-nav-btn">
+                        ✨ Upgrade
+                    </button>
+                    <button class="nav-button" onclick="resetApp()" title="Reset App" style="font-size: 0.8rem;">
+                        🔄
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <div class="app-main">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <div class="section-title">Quick Actions</div>
+                        <div class="quick-actions">
+                            <button class="action-button primary" onclick="openCreateModal()">
+                                <span class="action-icon">➕</span>
+                                Add Memory
+                            </button>
+                            <button class="action-button secondary" onclick="openCapsuleModal()">
+                                <span class="action-icon">⏰</span>
+                                Create Capsule
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-section">
+                        <div class="section-title">Today's Activity</div>
+                        <div class="daily-stats">
+                            <div class="status-item">
+                                <span class="status-label">📊 Posts Saved Today</span>
+                                <span class="status-value" id="posts-today">0</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">🔄 Auto Synced</span>
+                                <span class="status-value" id="synced-today">0</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">📦 Total Memories</span>
+                                <span class="status-value" id="memory-count">0</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">⏰ Time Capsules</span>
+                                <span class="status-value" id="capsule-count">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-section">
+                        <div class="section-title">Connected Platforms</div>
+                        <div class="connected-platforms" id="connected-platforms">
+                            <div class="empty-platforms">
+                                <p>No platforms connected</p>
+                                <button class="connect-first-btn" onclick="showConnectModal()">
+                                    Connect Platform
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="content-area">
+                    <!-- Dashboard Header -->
+                    <header class="content-header">
+                        <div class="header-text">
+                            <h1>Your Story Vault</h1>
+                            <p>Preserving the stories that matter most</p>
+                        </div>
+                        <div class="header-actions">
+                            <button class="filter-button" onclick="toggleFilters()">
+                                <span class="filter-icon">🔍</span>
+                                Filter
+                            </button>
+                            <select class="sort-select" onchange="sortMemories(this.value)">
+                                <option value="recent">Most Recent</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="platform">By Platform</option>
+                                <option value="type">By Type</option>
+                            </select>
+                        </div>
+                    </header>
+                    
+                    <!-- Memory Feed -->
+                    <div class="memory-feed" id="memory-feed">
+                        <!-- Empty State -->
+                        <div class="empty-state" id="empty-state">
+                            <div class="empty-illustration">
+                                <div class="empty-icon">📭</div>
+                                <div class="empty-sparkles">
+                                    <span class="sparkle">✨</span>
+                                    <span class="sparkle">✨</span>
+                                    <span class="sparkle">✨</span>
+                                </div>
+                            </div>
+                            <h3>Your memory collection awaits</h3>
+                            <p>Connect your social media accounts or add memories manually to start building your digital time capsule.</p>
+                            
+                            <div class="empty-actions">
+                                <button class="action-large primary" onclick="showConnectModal()">
+                                    <span class="action-icon">🔗</span>
+                                    Connect Social Media
+                                </button>
+                                <button class="action-large secondary" onclick="openCreateModal()">
+                                    <span class="action-icon">📝</span>
+                                    Add Memory Manually
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Memory Grid -->
+                        <div class="memory-grid" id="memory-grid" style="display: none;">
+                            <!-- Memories will be loaded here -->
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Right Panel - Time Capsules -->
+                <aside class="right-panel">
+                    <div class="panel-section">
+                        <div class="panel-header">
+                            <h3>Time Capsules</h3>
+                            <button class="panel-action" onclick="openCapsuleModal()">
+                                <span class="action-icon">➕</span>
+                            </button>
+                        </div>
+                        
+                        <div class="capsule-list" id="capsule-list">
+                            <div class="empty-capsules">
+                                <div class="empty-capsule-icon">📦</div>
+                                <p>No time capsules yet</p>
+                                <small>Create your first capsule to preserve memories for the future</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <div class="panel-header">
+                            <h3>Recent Activity</h3>
+                        </div>
+                        <div class="activity-feed" id="activity-feed">
+                            <div class="activity-item">
+                                <div class="activity-icon">🎉</div>
+                                <div class="activity-text">
+                                    <span class="activity-title">Welcome to Story Vault!</span>
+                                    <span class="activity-time">Just now</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- Storage Migration Modal -->
+        <div class="modal" id="storage-migration-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Upgrade to Cloud Storage</h3>
+                    <button class="close-btn" onclick="closeModal('storage-migration-modal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="migration-info">
+                        <div class="migration-icon">☁️</div>
+                        <h4>Unlock Cloud Features</h4>
+                        <p>Move your memories to the cloud and get access to premium features:</p>
+                        
+                        <div class="cloud-benefits">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">📱</span>
+                                <span>Access from any device</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">🔄</span>
+                                <span>Automatic backup</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">🔗</span>
+                                <span>All social platforms</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">📤</span>
+                                <span>Share time capsules</span>
+                            </div>
+                        </div>
+                        
+                        <div class="migration-status">
+                            <span class="current-storage">Current: <strong id="current-storage-type">Local Storage</strong></span>
+                            <span class="memory-count">Memories to migrate: <strong id="migration-count">5</strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeModal('storage-migration-modal')">Stay Local</button>
+                    <button class="btn-primary" onclick="startMigration()">Start Free Trial</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Connect Platform Modal -->
+        <div class="modal large-modal" id="connect-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Connect Your Platforms</h3>
+                    <button class="close-btn" onclick="closeModal('connect-modal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="platform-connect-grid">
+                        <div class="connect-card available" data-platform="instagram">
+                            <div class="connect-header">
+                                <div class="platform-logo instagram-icon"><i class="fab fa-instagram"></i></div>
+                                <div class="platform-info">
+                                    <h4>Instagram</h4>
+                                    <p>Photos, stories, reels</p>
+                                </div>
+                                <div class="connect-status available">Available</div>
+                            </div>
+                            <button class="connect-button" onclick="connectPlatform('instagram')">
+                                Connect Instagram
+                            </button>
+                        </div>
+
+                        <div class="connect-card available" data-platform="twitter">
+                            <div class="connect-header">
+                                <div class="platform-logo twitter-icon"><i class="fab fa-twitter"></i></div>
+                                <div class="platform-info">
+                                    <h4>Twitter</h4>
+                                    <p>Tweets, likes, media</p>
+                                </div>
+                                <div class="connect-status available">Available</div>
+                            </div>
+                            <button class="connect-button" onclick="connectPlatform('twitter')">
+                                Connect Twitter
+                            </button>
+                        </div>
+
+                        <div class="connect-card premium" data-platform="facebook">
+                            <div class="connect-header">
+                                <div class="platform-logo facebook-icon"><i class="fab fa-facebook-f"></i></div>
+                                <div class="platform-info">
+                                    <h4>Facebook</h4>
+                                    <p>Posts, photos, memories</p>
+                                </div>
+                                <div class="connect-status premium">Premium</div>
+                            </div>
+                            <button class="connect-button premium" onclick="showUpgradeModal()">
+                                Upgrade to Connect
+                            </button>
+                        </div>
+
+                        <div class="connect-card premium" data-platform="spotify">
+                            <div class="connect-header">
+                                <div class="platform-logo spotify-icon"><i class="fab fa-spotify"></i></div>
+                                <div class="platform-info">
+                                    <h4>Spotify</h4>
+                                    <p>Playlists, listening history</p>
+                                </div>
+                                <div class="connect-status premium">Premium</div>
+                            </div>
+                            <button class="connect-button premium" onclick="showUpgradeModal()">
+                                Upgrade to Connect
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Panel -->
+        <div class="notification-panel" id="notification-panel" style="display: none;">
+            <div class="notification-header">
+                <h3>Notifications</h3>
+                <button class="close-panel" onclick="closeNotifications()">&times;</button>
+            </div>
+            <div class="notification-list" id="notification-list">
+                <div class="notification-item unread">
+                    <div class="notification-icon">🎉</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Welcome to Story Vault!</div>
+                        <div class="notification-text">Start connecting your social accounts to preserve your stories.</div>
+                        <div class="notification-time">Just now</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-footer">
+                <button class="btn-link" onclick="markAllAsRead()">Mark all as read</button>
+            </div>
+        </div>
+
+        <!-- Profile Dropdown -->
+        <div class="profile-dropdown" id="profile-dropdown" style="display: none;">
+            <div class="profile-header">
+                <div class="profile-avatar">👤</div>
+                <div class="profile-info">
+                    <div class="profile-name" id="profile-name">Story Vault User</div>
+                    <div class="profile-email" id="profile-email">user@example.com</div>
+                </div>
+            </div>
+            <div class="profile-menu">
+                <button class="profile-menu-item" onclick="openAccountSettings()">
+                    <span class="menu-icon">⚙️</span>
+                    Account Settings
+                </button>
+                <button class="profile-menu-item" onclick="openPreferences()">
+                    <span class="menu-icon">🎨</span>
+                    Preferences
+                </button>
+                <button class="profile-menu-item" onclick="exportUserData()">
+                    <span class="menu-icon">📊</span>
+                    Export Data
+                </button>
+                <hr class="menu-divider">
+                <button class="profile-menu-item" onclick="showHelpModal()">
+                    <span class="menu-icon">❓</span>
+                    Help & Support
+                </button>
+                <button class="profile-menu-item danger" onclick="confirmLogout()">
+                    <span class="menu-icon">🚪</span>
+                    Sign Out
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p id="loading-message">Processing...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="redesigned-app.js"></script>
+</body>
+</html>

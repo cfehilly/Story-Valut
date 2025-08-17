@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Memento Transitions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FAF7F1 0%, #F4F0E8 100%);
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        .app-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .onboarding-screen {
+            position: absolute;
+            width: 350px;
+            height: 600px;
+            background: #F7F3ED;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(139, 125, 107, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(50px) scale(0.9);
+            transition: all 0.5s ease-in-out;
+            text-align: center;
+        }
+        
+        .onboarding-screen.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        
+        .continue-btn {
+            background: linear-gradient(145deg, #D4A574, #B8956A);
+            border: none;
+            padding: 16px 32px;
+            border-radius: 25px;
+            color: #4A3F35;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s ease;
+        }
+        
+        .continue-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        h1 { color: #4A3F35; margin: 0 0 10px 0; }
+        h2 { color: #4A3F35; margin: 0 0 15px 0; }
+        p { color: #8B7D6B; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <div class="debug-info">
+        <div>Current Screen: <span id="current-screen">1</span></div>
+        <div>Total Screens: 5</div>
+        <div>Status: <span id="status">Ready</span></div>
+    </div>
+    
+    <div class="app-container">
+        <div class="onboarding-screen active" id="screen-1">
+            <h1>Welcome to Memento</h1>
+            <p>Your personal time capsule awaits</p>
+            <button class="continue-btn" onclick="nextScreen(1)">Begin Journey</button>
+        </div>
+
+        <div class="onboarding-screen" id="screen-2">
+            <h2>Capture Moments</h2>
+            <p>Every memory is precious. Save your photos, thoughts, and special moments.</p>
+            <button class="continue-btn" onclick="nextScreen(2)">Continue</button>
+        </div>
+
+        <div class="onboarding-screen" id="screen-3">
+            <h2>Lock in Time</h2>
+            <p>Set a future date to unlock your memories. Let time add its own magic.</p>
+            <button class="continue-btn" onclick="nextScreen(3)">Continue</button>
+        </div>
+
+        <div class="onboarding-screen" id="screen-4">
+            <h2>Rediscover Magic</h2>
+            <p>When the time comes, receive gentle reminders to unlock your memories.</p>
+            <button class="continue-btn" onclick="nextScreen(4)">Continue</button>
+        </div>
+
+        <div class="onboarding-screen" id="screen-5">
+            <h2>Welcome Home</h2>
+            <p>Your digital attic awaits. Start collecting moments that will become treasures.</p>
+            <button class="continue-btn" onclick="resetOnboarding()">Start Over</button>
+        </div>
+    </div>
+
+    <script>
+        let currentScreen = 1;
+        const totalScreens = 5;
+        
+        function updateDebug() {
+            document.getElementById('current-screen').textContent = currentScreen;
+            document.getElementById('status').textContent = 'Screen ' + currentScreen + ' active';
+        }
+        
+        function nextScreen(screenNumber) {
+            console.log('Transitioning from screen', screenNumber, 'to screen', screenNumber + 1);
+            
+            const currentScreenElement = document.getElementById(`screen-${screenNumber}`);
+            const nextScreenElement = document.getElementById(`screen-${screenNumber + 1}`);
+            
+            if (!nextScreenElement) {
+                console.log('No next screen found');
+                return;
+            }
+            
+            // Hide current screen
+            currentScreenElement.classList.remove('active');
+            
+            // Show next screen after a brief delay
+            setTimeout(() => {
+                nextScreenElement.classList.add('active');
+                currentScreen = screenNumber + 1;
+                updateDebug();
+                console.log('Now on screen', currentScreen);
+            }, 100);
+        }
+        
+        function resetOnboarding() {
+            // Hide all screens
+            for (let i = 1; i <= totalScreens; i++) {
+                const screen = document.getElementById(`screen-${i}`);
+                if (screen) {
+                    screen.classList.remove('active');
+                }
+            }
+            
+            // Show first screen
+            setTimeout(() => {
+                document.getElementById('screen-1').classList.add('active');
+                currentScreen = 1;
+                updateDebug();
+            }, 200);
+        }
+        
+        // Initialize
+        updateDebug();
+        console.log('Debug version loaded');
+    </script>
+</body>
+</html>

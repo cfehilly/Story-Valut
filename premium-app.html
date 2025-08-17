@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memento - Digital Time Capsule</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="premium-styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Premium Banner -->
+        <div class="premium-banner" id="premium-banner">
+            <div class="premium-content">
+                <div class="premium-icon">✨</div>
+                <div class="premium-text">
+                    <span class="premium-title">Unlock Premium Magic</span>
+                    <span class="premium-subtitle">Unlimited capsules • All platforms • Advanced features</span>
+                </div>
+                <button class="premium-cta" onclick="showPremiumModal()">Upgrade</button>
+            </div>
+            <button class="banner-close" onclick="closePremiumBanner()">&times;</button>
+        </div>
+
+        <!-- Onboarding Flow -->
+        <div class="onboarding-flow" id="onboarding-flow">
+            <!-- Screen 1: Welcome -->
+            <div class="onboarding-screen active" id="screen-1">
+                <div class="content">
+                    <div class="app-icon">
+                        <div class="icon-chest">
+                            <div class="chest-body"></div>
+                            <div class="chest-lid"></div>
+                            <div class="chest-glow"></div>
+                        </div>
+                    </div>
+                    <h1 class="app-title">Memento</h1>
+                    <p class="subtitle">Your personal time capsule</p>
+                    <div class="magic-sparkles">
+                        <div class="sparkle"></div>
+                        <div class="sparkle"></div>
+                        <div class="sparkle"></div>
+                    </div>
+                </div>
+                <button class="continue-btn" onclick="nextScreen(1)">
+                    <span>Begin Journey</span>
+                </button>
+            </div>
+
+            <!-- Screen 2: Features -->
+            <div class="onboarding-screen" id="screen-2">
+                <div class="content">
+                    <div class="feature-icon">
+                        <div class="camera-icon"></div>
+                    </div>
+                    <h2>Capture Moments</h2>
+                    <p>Connect social media accounts and preserve your digital memories forever.</p>
+                    
+                    <div class="feature-tiers">
+                        <div class="tier-preview free-tier">
+                            <span class="tier-badge">FREE</span>
+                            <ul>
+                                <li>✓ 3 time capsules</li>
+                                <li>✓ 2 social platforms</li>
+                                <li>✓ Basic memories</li>
+                            </ul>
+                        </div>
+                        <div class="tier-preview premium-tier">
+                            <span class="tier-badge premium">PREMIUM</span>
+                            <ul>
+                                <li>✨ Unlimited capsules</li>
+                                <li>✨ All 6+ platforms</li>
+                                <li>✨ Advanced features</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="continue-btn" onclick="nextScreen(2)">
+                    <span>Continue</span>
+                </button>
+            </div>
+
+            <!-- Screen 3: Premium Preview -->
+            <div class="onboarding-screen" id="screen-3">
+                <div class="content">
+                    <div class="feature-icon">
+                        <div class="premium-crown">👑</div>
+                    </div>
+                    <h2>Premium Magic</h2>
+                    <p>Unlock the full potential of your digital memory preservation.</p>
+                    
+                    <div class="premium-features">
+                        <div class="premium-feature">
+                            <span class="feature-icon-small">🔗</span>
+                            <span>Connect all major platforms</span>
+                        </div>
+                        <div class="premium-feature">
+                            <span class="feature-icon-small">📦</span>
+                            <span>Unlimited time capsules</span>
+                        </div>
+                        <div class="premium-feature">
+                            <span class="feature-icon-small">☁️</span>
+                            <span>Cloud backup & sync</span>
+                        </div>
+                        <div class="premium-feature">
+                            <span class="feature-icon-small">🎨</span>
+                            <span>Custom themes & layouts</span>
+                        </div>
+                    </div>
+                    
+                    <div class="trial-offer">
+                        <p><strong>Start your 7-day free trial</strong></p>
+                        <p class="trial-details">Then $4.99/month • Cancel anytime</p>
+                    </div>
+                </div>
+                <button class="continue-btn premium-btn" onclick="startTrial()">
+                    <span>Start Free Trial</span>
+                </button>
+                <button class="continue-link" onclick="nextScreen(3)">Continue with Free</button>
+            </div>
+
+            <!-- Screen 4: Ready to Start -->
+            <div class="onboarding-screen" id="screen-4">
+                <div class="content">
+                    <h2>You're All Set!</h2>
+                    <p>Ready to start preserving your digital memories for the future.</p>
+                    
+                    <div class="welcome-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" id="capsule-limit">3</div>
+                            <div class="stat-label">Time Capsules</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="platform-limit">2</div>
+                            <div class="stat-label">Social Platforms</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">∞</div>
+                            <div class="stat-label">Memories</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="continue-btn" onclick="showMainApp()">
+                    <span>Start Creating</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main App Interface -->
+        <div class="main-app" id="main-app" style="display: none;">
+            <!-- Navigation Header -->
+            <header class="app-header">
+                <div class="header-content">
+                    <div class="app-logo">
+                        <div class="mini-chest"></div>
+                        <span>Memento</span>
+                        <div class="plan-indicator" id="plan-indicator">FREE</div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="upgrade-btn" onclick="showPremiumModal()">
+                            ✨ Upgrade
+                        </button>
+                        <button class="notification-btn">
+                            <span class="notification-count">3</span>
+                            🔔
+                        </button>
+                        <button class="profile-btn" onclick="showProfileModal()">👤</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Tab Navigation -->
+                <nav class="tab-navigation">
+                    <button class="tab-btn active" data-tab="home">🏠 Home</button>
+                    <button class="tab-btn" data-tab="connect">🔗 Connect</button>
+                    <button class="tab-btn" data-tab="capsules">📦 Capsules</button>
+                    <button class="tab-btn" data-tab="discover">✨ Discover</button>
+                </nav>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Home Tab -->
+                    <div class="tab-pane active" id="home-tab">
+                        <!-- Welcome Hero -->
+                        <div class="home-hero">
+                            <div class="hero-content">
+                                <h2>Welcome back to Memento</h2>
+                                <p>Your digital memories, preserved and ready to rediscover</p>
+                            </div>
+                            <div class="hero-stats">
+                                <div class="stat-bubble">
+                                    <div class="stat-number" id="total-memories">0</div>
+                                    <div class="stat-label">Memories</div>
+                                </div>
+                                <div class="stat-bubble">
+                                    <div class="stat-number" id="connected-platforms">0</div>
+                                    <div class="stat-label">Connected</div>
+                                </div>
+                                <div class="stat-bubble unlockable" id="ready-capsules" style="display: none;">
+                                    <div class="stat-number">0</div>
+                                    <div class="stat-label">Ready to Unlock</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Actions -->
+                        <div class="main-actions">
+                            <button class="primary-action" onclick="openCreateModal()">
+                                <div class="action-content">
+                                    <div class="action-icon">📸</div>
+                                    <div class="action-text">
+                                        <span class="action-title">Add a Memory</span>
+                                        <span class="action-subtitle">Capture this moment</span>
+                                    </div>
+                                </div>
+                                <div class="action-arrow">→</div>
+                            </button>
+
+                            <div class="secondary-actions">
+                                <button class="secondary-action" onclick="showTab('connect')">
+                                    <div class="action-icon">🔗</div>
+                                    <span>Connect Accounts</span>
+                                </button>
+                                <button class="secondary-action" onclick="showTab('discover')">
+                                    <div class="action-icon">✨</div>
+                                    <span>Explore Timeline</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="account-overview">
+                            <div class="overview-section">
+                                <div class="section-header">
+                                    <h3>Your Account</h3>
+                                    <span class="plan-badge" id="plan-badge">FREE PLAN</span>
+                                </div>
+                                <div class="overview-stats">
+                                    <div class="overview-stat">
+                                        <span class="stat-icon">📦</span>
+                                        <div class="stat-info">
+                                            <span class="stat-value"><span id="capsule-count-home">0</span> / <span id="capsule-max-home">3</span></span>
+                                            <span class="stat-description">Time capsules created</span>
+                                        </div>
+                                    </div>
+                                    <div class="overview-stat">
+                                        <span class="stat-icon">🔗</span>
+                                        <div class="stat-info">
+                                            <span class="stat-value"><span id="platform-count-home">0</span> / <span id="platform-max-home">2</span></span>
+                                            <span class="stat-description">Social platforms connected</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="overview-action" onclick="showTab('connect')" id="main-overview-action">
+                                    Connect Your First Account
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="recent-activity">
+                            <div class="section-header">
+                                <h3>Recent Activity</h3>
+                                <button class="view-all-btn" onclick="showTab('discover')">View All</button>
+                            </div>
+                            
+                            <!-- Empty State -->
+                            <div class="empty-state" id="empty-state">
+                                <div class="empty-icon">📱</div>
+                                <h4>Start Your Memory Journey</h4>
+                                <p>Connect your social accounts to automatically preserve your digital memories, or add your first memory manually.</p>
+                                <div class="empty-actions">
+                                    <button class="btn-primary" onclick="showTab('connect')">Connect Social Media</button>
+                                    <button class="btn-secondary" onclick="openCreateModal()">Add Memory Manually</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent Memories -->
+                            <div class="recent-memories-grid" id="recent-memories-grid" style="display: none;">
+                                <!-- Recent memories will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Quick Time Capsule Creation -->
+                        <div class="quick-capsule" id="quick-capsule" style="display: none;">
+                            <div class="capsule-prompt">
+                                <div class="prompt-content">
+                                    <div class="prompt-icon">⏰</div>
+                                    <div class="prompt-text">
+                                        <h4>Create Your First Time Capsule</h4>
+                                        <p>You have <span id="memory-count-capsule">0</span> memories ready to preserve for the future</p>
+                                    </div>
+                                </div>
+                                <button class="prompt-action" onclick="checkCapsuleLimit()">Create Capsule</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connect Tab -->
+                    <div class="tab-pane" id="connect-tab">
+                        <div class="connect-header">
+                            <h2>Connect Your Accounts</h2>
+                            <p>Link your social media to automatically save memories</p>
+                        </div>
+
+                        <div class="social-connections">
+                            <!-- Free Platforms -->
+                            <div class="platform-section">
+                                <h3>✓ Free Plan Platforms</h3>
+                                <div class="social-card" data-platform="instagram">
+                                    <div class="social-info">
+                                        <div class="social-icon instagram-icon">📷</div>
+                                        <div class="social-details">
+                                            <h3>Instagram</h3>
+                                            <p>Import your photos and stories</p>
+                                            <span class="connection-status" id="instagram-status">Not connected</span>
+                                        </div>
+                                    </div>
+                                    <button class="connect-btn" onclick="connectSocial('instagram')">Connect</button>
+                                </div>
+
+                                <div class="social-card" data-platform="twitter">
+                                    <div class="social-info">
+                                        <div class="social-icon twitter-icon">🐦</div>
+                                        <div class="social-details">
+                                            <h3>Twitter</h3>
+                                            <p>Save your tweets, likes, and media</p>
+                                            <span class="connection-status" id="twitter-status">Not connected</span>
+                                        </div>
+                                    </div>
+                                    <button class="connect-btn" onclick="connectSocial('twitter')">Connect</button>
+                                </div>
+                            </div>
+
+                            <!-- Premium Platforms -->
+                            <div class="platform-section premium-section">
+                                <h3>✨ Premium Platforms</h3>
+                                
+                                <div class="social-card premium-locked" data-platform="facebook">
+                                    <div class="premium-overlay">
+                                        <div class="premium-lock">🔒</div>
+                                        <span>Premium Only</span>
+                                    </div>
+                                    <div class="social-info">
+                                        <div class="social-icon facebook-icon">👥</div>
+                                        <div class="social-details">
+                                            <h3>Facebook</h3>
+                                            <p>Save posts, photos, and memories</p>
+                                        </div>
+                                    </div>
+                                    <button class="connect-btn premium-required" onclick="showPremiumModal()">Upgrade</button>
+                                </div>
+
+                                <div class="social-card premium-locked" data-platform="youtube">
+                                    <div class="premium-overlay">
+                                        <div class="premium-lock">🔒</div>
+                                        <span>Premium Only</span>
+                                    </div>
+                                    <div class="social-info">
+                                        <div class="social-icon youtube-icon">📹</div>
+                                        <div class="social-details">
+                                            <h3>YouTube</h3>
+                                            <p>Archive your favorite videos</p>
+                                        </div>
+                                    </div>
+                                    <button class="connect-btn premium-required" onclick="showPremiumModal()">Upgrade</button>
+                                </div>
+
+                                <div class="social-card premium-locked" data-platform="tiktok">
+                                    <div class="premium-overlay">
+                                        <div class="premium-lock">🔒</div>
+                                        <span>Premium Only</span>
+                                    </div>
+                                    <div class="social-info">
+                                        <div class="social-icon tiktok-icon">🎵</div>
+                                        <div class="social-details">
+                                            <h3>TikTok</h3>
+                                            <p>Save your videos and favorites</p>
+                                        </div>
+                                    </div>
+                                    <button class="connect-btn premium-required" onclick="showPremiumModal()">Upgrade</button>
+                                </div>
+
+                                <div class="social-card premium-locked" data-platform="spotify">
+                                    <div class="premium-overlay">
+                                        <div class="premium-lock">🔒</div>
+                                        <span>Premium Only</span>
+                                    </div>
+                                    <div class="social-info">
+                                        <div class="social-icon spotify-icon">🎶</div>
+                                        <div class="social-details">
+                                            <h3>Spotify</h3>
+                                            <p>Archive playlists and listening history</p>
+                                        </div>
+                                    </div>
+                                    <button class="connect-btn premium-required" onclick="showPremiumModal()">Upgrade</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Capsules Tab -->
+                    <div class="tab-pane" id="capsules-tab">
+                        <div class="capsules-header">
+                            <h2>Your Time Capsules</h2>
+                            <p>Memories locked in time, waiting to be rediscovered</p>
+                            <button class="create-capsule-btn" onclick="checkCapsuleLimit()">
+                                + Create New Capsule
+                            </button>
+                        </div>
+
+                        <div class="capsules-grid" id="capsules-grid">
+                            <!-- Time capsules will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Discover Tab -->
+                    <div class="tab-pane" id="discover-tab">
+                        <div class="discover-header">
+                            <h2>Rediscover Your Memories</h2>
+                            <p>Unlocked capsules and memory highlights</p>
+                        </div>
+
+                        <!-- Premium Discovery Features -->
+                        <div class="premium-discovery">
+                            <div class="discovery-feature premium-locked">
+                                <div class="feature-content">
+                                    <h3>🧠 Memory Insights</h3>
+                                    <p>AI-powered memory patterns, mood tracking, and personal analytics</p>
+                                </div>
+                                <button class="feature-upgrade" onclick="showPremiumModal()">Upgrade</button>
+                            </div>
+                            
+                            <div class="discovery-feature premium-locked">
+                                <div class="feature-content">
+                                    <h3>🎨 Custom Themes</h3>
+                                    <p>Personalize your memory experience with beautiful seasonal themes</p>
+                                </div>
+                                <button class="feature-upgrade" onclick="showPremiumModal()">Upgrade</button>
+                            </div>
+                        </div>
+
+                        <div class="memory-timeline" id="memory-timeline">
+                            <!-- Timeline will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Premium Modal -->
+        <div class="modal premium-modal" id="premium-modal">
+            <div class="modal-content premium-modal-content">
+                <div class="modal-header premium-header">
+                    <div class="premium-logo">
+                        <span class="premium-crown-big">👑</span>
+                        <h3>Memento Premium</h3>
+                    </div>
+                    <button class="close-btn" onclick="closeModal('premium-modal')">&times;</button>
+                </div>
+                
+                <div class="modal-body premium-body">
+                    <div class="premium-hero">
+                        <h2>Unlock Your Memory Magic</h2>
+                        <p>Transform how you preserve and rediscover your digital life</p>
+                    </div>
+                    
+                    <div class="pricing-plans">
+                        <div class="plan-card recommended">
+                            <div class="plan-badge">Most Popular</div>
+                            <div class="plan-header">
+                                <h3>Premium Monthly</h3>
+                                <div class="plan-price">
+                                    <span class="price">$4.99</span>
+                                    <span class="period">/month</span>
+                                </div>
+                            </div>
+                            <ul class="plan-features">
+                                <li>✨ Unlimited time capsules</li>
+                                <li>🔗 Connect all 6+ platforms</li>
+                                <li>☁️ Cloud backup & sync</li>
+                                <li>🧠 AI memory insights</li>
+                                <li>🎨 Custom themes</li>
+                                <li>📱 Mobile app access</li>
+                                <li>💌 Priority support</li>
+                            </ul>
+                            <button class="plan-button primary" onclick="subscribePlan('monthly')">
+                                Start 7-Day Free Trial
+                            </button>
+                            <p class="plan-trial">Then $4.99/month • Cancel anytime</p>
+                        </div>
+                        
+                        <div class="plan-card">
+                            <div class="plan-header">
+                                <h3>Premium Yearly</h3>
+                                <div class="plan-price">
+                                    <span class="price">$39.99</span>
+                                    <span class="period">/year</span>
+                                    <span class="savings">Save 33%</span>
+                                </div>
+                            </div>
+                            <ul class="plan-features">
+                                <li>✨ Everything in Monthly</li>
+                                <li>🎁 2 months FREE</li>
+                                <li>🏷️ Early access to features</li>
+                                <li>📧 Memory newsletter</li>
+                            </ul>
+                            <button class="plan-button secondary" onclick="subscribePlan('yearly')">
+                                Start 7-Day Free Trial
+                            </button>
+                            <p class="plan-trial">Then $39.99/year • Cancel anytime</p>
+                        </div>
+                    </div>
+                    
+                    <div class="premium-testimonials">
+                        <div class="testimonial">
+                            <p>"Memento Premium has completely changed how I think about my digital memories. The AI insights are incredible!"</p>
+                            <cite>— Sarah M., Premium User</cite>
+                        </div>
+                    </div>
+                    
+                    <div class="premium-guarantee">
+                        <div class="guarantee-badge">💯</div>
+                        <div class="guarantee-text">
+                            <strong>30-Day Money-Back Guarantee</strong>
+                            <p>Try Premium risk-free. If you're not completely satisfied, get a full refund.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Modal -->
+        <div class="modal" id="profile-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Account Settings</h3>
+                    <button class="close-btn" onclick="closeModal('profile-modal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="profile-section">
+                        <h4>Current Plan</h4>
+                        <div class="plan-status">
+                            <div class="plan-info">
+                                <span class="plan-name" id="current-plan">Free Plan</span>
+                                <span class="plan-details" id="plan-details">3 time capsules • 2 platforms</span>
+                            </div>
+                            <button class="plan-manage" onclick="showPremiumModal()">Upgrade</button>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h4>Usage Statistics</h4>
+                        <div class="usage-overview">
+                            <div class="usage-stat">
+                                <span class="stat-label">Memories Created</span>
+                                <span class="stat-value">0</span>
+                            </div>
+                            <div class="usage-stat">
+                                <span class="stat-label">Time Capsules</span>
+                                <span class="stat-value">0 / 3</span>
+                            </div>
+                            <div class="usage-stat">
+                                <span class="stat-label">Connected Platforms</span>
+                                <span class="stat-value">0 / 2</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <h4>Preferences</h4>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                                Email notifications for unlocked capsules
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                                Weekly memory highlights
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Limit Reached Modal -->
+        <div class="modal" id="limit-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>🚫 Limit Reached</h3>
+                    <button class="close-btn" onclick="closeModal('limit-modal')">&times;</button>
+                </div>
+                <div class="modal-body limit-body">
+                    <div class="limit-message">
+                        <p>You've reached your <strong>free plan limit</strong>.</p>
+                        <p>Upgrade to Premium for unlimited access to all features!</p>
+                    </div>
+                    
+                    <div class="limit-comparison">
+                        <div class="comparison-column">
+                            <h4>Free Plan</h4>
+                            <ul>
+                                <li>3 time capsules</li>
+                                <li>2 social platforms</li>
+                                <li>Basic features</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-column premium">
+                            <h4>Premium Plan</h4>
+                            <ul>
+                                <li>✨ Unlimited capsules</li>
+                                <li>✨ All 6+ platforms</li>
+                                <li>✨ Advanced features</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeModal('limit-modal')">Maybe Later</button>
+                    <button class="btn-primary" onclick="showPremiumModal(); closeModal('limit-modal');">Upgrade Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p id="loading-message">Processing...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="premium-app.js"></script>
+</body>
+</html>
